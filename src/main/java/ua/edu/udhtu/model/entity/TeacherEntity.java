@@ -1,6 +1,6 @@
-package org.example.model.entity;
+package ua.edu.udhtu.model.entity;
 
-import org.example.model.enumerated.EAcademicDegree;
+import ua.edu.udhtu.model.enumerated.EAcademicDegree;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,6 +23,8 @@ public class TeacherEntity extends BasedEntity<Long> {
     private StudyGroupEntity studyGroup;
     @OneToMany(targetEntity = TimetableOfClassesEntity.class, mappedBy = "studyGroup", fetch = FetchType.LAZY)
     private List<TimetableOfClassesEntity> timetableOfClasses;
+    @OneToMany(targetEntity = GradeBookEntity.class, mappedBy = "teacher")
+    private List<GradeBookEntity> gradeBooks;
 
     public PersonEntity getPerson() {
         return person;

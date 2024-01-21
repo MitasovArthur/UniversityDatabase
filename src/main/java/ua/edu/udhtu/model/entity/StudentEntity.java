@@ -1,8 +1,10 @@
-package org.example.model.entity;
+package ua.edu.udhtu.model.entity;
 
-import org.example.model.enumerated.EEducationType;
+import ua.edu.udhtu.model.enumerated.EEducationType;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "students")
 public class StudentEntity extends BasedEntity<Long> {
@@ -19,6 +21,8 @@ public class StudentEntity extends BasedEntity<Long> {
     private String address;
     @Column(name = "email")
     private String email;
+    @OneToMany(targetEntity = ActivityEntity.class, mappedBy = "student", cascade = CascadeType.REMOVE)
+    private List<ActivityEntity> activity;
 
     public PersonEntity getPerson() {
         return person;

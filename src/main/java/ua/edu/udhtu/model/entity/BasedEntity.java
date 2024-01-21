@@ -1,13 +1,15 @@
-package org.example.model.entity;
+package ua.edu.udhtu.model.entity;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.MappedSuperclass;
 import java.util.Objects;
+
+
 @MappedSuperclass
-public class BasedEntity <ID extends  Number>{
+public class BasedEntity<ID extends Number> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private ID id;

@@ -1,4 +1,4 @@
-package org.example.model.entity;
+package ua.edu.udhtu.model.entity;
 
 
 import javax.persistence.*;
@@ -9,10 +9,9 @@ import java.util.List;
 public class StudyGroupEntity extends BasedEntity<Long> {
     @Column(name = "code", length = 25)
     private int code;
-    @OneToOne(targetEntity = TeacherEntity.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @Column(name = "curator")
+    @OneToOne(mappedBy = "studyGroup")
     private TeacherEntity curator;
-    @OneToMany(targetEntity = SubjectEntity.class, mappedBy = "studyGroup", cascade = CascadeType.REMOVE)
+    @OneToMany(targetEntity = StudentEntity.class, mappedBy = "studyGroup", cascade = CascadeType.REMOVE)
     private List<StudentEntity> students;
     @OneToMany(targetEntity = TimetableOfClassesEntity.class,mappedBy = "studyGroup",fetch = FetchType.LAZY)
     private List<TimetableOfClassesEntity> timetableOfClasses;

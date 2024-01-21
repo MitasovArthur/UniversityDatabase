@@ -1,4 +1,4 @@
-package org.example.model.entity;
+package ua.edu.udhtu.model.entity;
 
 import javax.persistence.*;
 import java.util.Date;

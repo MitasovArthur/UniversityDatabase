@@ -1,4 +1,4 @@
-package org.example.model.entity;
+package ua.edu.udhtu.model.entity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,8 +13,18 @@ public class SubjectEntity extends BasedEntity<Long> {
     private double hourSubject;
     @ManyToMany(targetEntity = TeacherEntity.class, mappedBy = "subjects", fetch = FetchType.LAZY)
     private Set<TeacherEntity> teachers;
-    @OneToMany(targetEntity = TimetableOfClassesEntity.class,mappedBy = "subject",fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = TimetableOfClassesEntity.class, mappedBy = "subject", fetch = FetchType.LAZY)
     private List<TimetableOfClassesEntity> timetableOfClasses;
+    @ManyToOne(targetEntity = StudyGroupEntity.class)
+    @JoinColumn(name = "study_group_id")
+    private StudyGroupEntity studyGroup;
+
+    @OneToMany(targetEntity = ActivityEntity.class, mappedBy = "subject", cascade = CascadeType.REMOVE)
+    private List<ActivityEntity> activity;
+
+    @OneToMany(targetEntity = GradeBookEntity.class,mappedBy = "subject")
+    private List<GradeBookEntity> gradeBooks;
+
 
     public String getNameSubject() {
         return nameSubject;
@@ -46,5 +56,21 @@ public class SubjectEntity extends BasedEntity<Long> {
 
     public void setTimetableOfClasses(List<TimetableOfClassesEntity> timetableOfClasses) {
         this.timetableOfClasses = timetableOfClasses;
+    }
+
+    public StudyGroupEntity getStudyGroup() {
+        return studyGroup;
+    }
+
+    public void setStudyGroup(StudyGroupEntity studyGroup) {
+        this.studyGroup = studyGroup;
+    }
+
+    public List<ActivityEntity> getActivity() {
+        return activity;
+    }
+
+    public void setActivity(List<ActivityEntity> activity) {
+        this.activity = activity;
     }
 }

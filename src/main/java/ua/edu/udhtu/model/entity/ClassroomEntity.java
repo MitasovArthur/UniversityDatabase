@@ -1,6 +1,6 @@
-package org.example.model.entity;
+package ua.edu.udhtu.model.entity;
 
-import org.example.model.enumerated.EClassRoomType;
+import ua.edu.udhtu.model.enumerated.EClassRoomType;
 
 import javax.persistence.*;
 import java.util.List;
