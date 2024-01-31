@@ -1,7 +1,5 @@
 package ua.edu.udhtu.model.entity;
 
-import jdk.jfr.Enabled;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,9 +16,12 @@ public class GradeBookEntity extends BasedEntity<Long> {
     private StudyGroupEntity group;
     @OneToMany(targetEntity = ActivityEntity.class, mappedBy = "gradeBook", cascade = CascadeType.REMOVE)
     private List<ActivityEntity> activity;
+    @Column(name = "grade")
     private int grade;
-    private int semesterGrade;
-    private int yearlyGrade;
+    @Column(name = "semester_grade")
+    private double semesterGrade;
+    @Column(name = "yearly_grade")
+    private double yearlyGrade;
 
     public SubjectEntity getSubject() {
         return subject;
@@ -62,20 +63,19 @@ public class GradeBookEntity extends BasedEntity<Long> {
         this.grade = grade;
     }
 
-    public int getSemesterGrade() {
+    public double getSemesterGrade() {
         return semesterGrade;
     }
 
-    public void setSemesterGrade(int semesterGrade) {
+    public void setSemesterGrade(double semesterGrade) {
         this.semesterGrade = semesterGrade;
     }
 
-    public int getYearlyGrade() {
+    public double getYearlyGrade() {
         return yearlyGrade;
     }
 
-    public void setYearlyGrade(int yearlyGrade) {
+    public void setYearlyGrade(double yearlyGrade) {
         this.yearlyGrade = yearlyGrade;
     }
-
 }

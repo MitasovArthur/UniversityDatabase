@@ -8,19 +8,19 @@ import java.util.List;
 @Table(name = "study_groups")
 public class StudyGroupEntity extends BasedEntity<Long> {
     @Column(name = "code", length = 25)
-    private int code;
+    private String code;
     @OneToOne(mappedBy = "studyGroup")
     private TeacherEntity curator;
     @OneToMany(targetEntity = StudentEntity.class, mappedBy = "studyGroup", cascade = CascadeType.REMOVE)
     private List<StudentEntity> students;
-    @OneToMany(targetEntity = TimetableOfClassesEntity.class,mappedBy = "studyGroup",fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = TimetableOfClassesEntity.class, mappedBy = "studyGroup", fetch = FetchType.LAZY)
     private List<TimetableOfClassesEntity> timetableOfClasses;
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

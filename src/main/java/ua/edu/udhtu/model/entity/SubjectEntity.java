@@ -18,13 +18,10 @@ public class SubjectEntity extends BasedEntity<Long> {
     @ManyToOne(targetEntity = StudyGroupEntity.class)
     @JoinColumn(name = "study_group_id")
     private StudyGroupEntity studyGroup;
-
     @OneToMany(targetEntity = ActivityEntity.class, mappedBy = "subject", cascade = CascadeType.REMOVE)
     private List<ActivityEntity> activity;
-
-    @OneToMany(targetEntity = GradeBookEntity.class,mappedBy = "subject")
+    @OneToMany(targetEntity = GradeBookEntity.class, mappedBy = "subject")
     private List<GradeBookEntity> gradeBooks;
-
 
     public String getNameSubject() {
         return nameSubject;
@@ -72,5 +69,13 @@ public class SubjectEntity extends BasedEntity<Long> {
 
     public void setActivity(List<ActivityEntity> activity) {
         this.activity = activity;
+    }
+
+    public List<GradeBookEntity> getGradeBooks() {
+        return gradeBooks;
+    }
+
+    public void setGradeBooks(List<GradeBookEntity> gradeBooks) {
+        this.gradeBooks = gradeBooks;
     }
 }

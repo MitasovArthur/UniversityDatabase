@@ -13,7 +13,7 @@ public class ClassroomEntity extends BasedEntity<Long> {
     @Enumerated
     @Column(name = "type", length = 20)
     private EClassRoomType type;
-    @OneToMany(targetEntity = TimetableOfClassesEntity.class,mappedBy = "classRoom",fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = TimetableOfClassesEntity.class, mappedBy = "classRoom", fetch = FetchType.LAZY)
     private List<TimetableOfClassesEntity> timetableOfClasses;
 
     public String getCode() {

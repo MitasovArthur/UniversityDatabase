@@ -1,12 +1,10 @@
 package ua.edu.udhtu.model.entity;
 
-import javax.persistence.Id;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.util.Objects;
-
 
 @MappedSuperclass
 public class BasedEntity<ID extends Number> {

@@ -2,21 +2,28 @@ package ua.edu.udhtu.model.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Entity
 @Table(name = "activity")
 public class ActivityEntity extends BasedEntity<Long> {
-    @ManyToOne(targetEntity = GradeBookEntity.class)
-    @JoinColumn(name = "grade_book_id")
-    private GradeBookEntity gradeBook;
     @ManyToOne(targetEntity = SubjectEntity.class)
     @JoinColumn(name = "subject_id")
     private SubjectEntity subject;
+    @Column(name = "name_activity", length = 50)
+    private String nameActivity;
+    @Column(name = "description")
     private String description;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "dead_line")
     private Date deadLine;
     @ManyToOne(targetEntity = StudentEntity.class)
     @JoinColumn(name = "student_id")
     private StudentEntity student;
+    @Column(name = "grade")
     private int grade;
+    @ManyToOne(targetEntity = GradeBookEntity.class)
+    @JoinColumn(name = "grade_book_id")
+    private GradeBookEntity gradeBook;
 
     public SubjectEntity getSubject() {
         return subject;
@@ -24,6 +31,14 @@ public class ActivityEntity extends BasedEntity<Long> {
 
     public void setSubject(SubjectEntity subject) {
         this.subject = subject;
+    }
+
+    public String getNameActivity() {
+        return nameActivity;
+    }
+
+    public void setNameActivity(String nameActivity) {
+        this.nameActivity = nameActivity;
     }
 
     public String getDescription() {

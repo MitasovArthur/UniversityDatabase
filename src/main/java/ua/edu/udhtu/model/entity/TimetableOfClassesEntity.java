@@ -49,12 +49,12 @@ public class TimetableOfClassesEntity extends BasedEntity<Long> {
         this.subject = subject;
     }
 
-    public ClassroomEntity getClassroom() {
+    public ClassroomEntity getClassRoom() {
         return classRoom;
     }
 
-    public void setClassroom(ClassroomEntity classroom) {
-        this.classRoom = classroom;
+    public void setClassRoom(ClassroomEntity classRoom) {
+        this.classRoom = classRoom;
     }
 
     public Date getStartLesson() {
