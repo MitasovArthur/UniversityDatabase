@@ -10,7 +10,7 @@ import java.util.List;
 public class ClassroomEntity extends BasedEntity<Long> {
     @Column(name = "code", length = 20)
     private String code;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "type", length = 20)
     private EClassRoomType type;
     @OneToMany(targetEntity = TimetableOfClassesEntity.class, mappedBy = "classRoom", fetch = FetchType.LAZY)

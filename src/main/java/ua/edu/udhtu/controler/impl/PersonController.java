@@ -1,15 +1,14 @@
-package ua.edu.udhtu.controler;
+package ua.edu.udhtu.controler.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ua.edu.udhtu.Factory.PersonFactory;
-import ua.edu.udhtu.controler.impl.BasedController;
+import org.springframework.web.bind.annotation.RestController;
+import ua.edu.udhtu.Factory.impl.PersonFactory;
 import ua.edu.udhtu.model.dto.PersonDto;
 import ua.edu.udhtu.model.entity.PersonEntity;
-import ua.edu.udhtu.service.PersonService;
+import ua.edu.udhtu.service.impl.PersonService;
 
-@Controller
+@RestController
 @RequestMapping("person")
 public class PersonController extends BasedController<PersonEntity, PersonDto, Long, PersonFactory> {
     @Autowired

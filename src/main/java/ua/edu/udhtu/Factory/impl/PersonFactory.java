@@ -1,10 +1,8 @@
-package ua.edu.udhtu.Factory;
+package ua.edu.udhtu.Factory.impl;
 
-import org.springframework.stereotype.Component;
-import ua.edu.udhtu.Factory.impl.AbstractTableFactory;
 import ua.edu.udhtu.model.dto.PersonDto;
 import ua.edu.udhtu.model.entity.PersonEntity;
-@Component
+
 public class PersonFactory extends AbstractTableFactory<PersonEntity, PersonDto, Long> {
     @Override
     protected PersonDto buildDto(PersonEntity entity, boolean all) {

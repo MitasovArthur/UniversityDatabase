@@ -12,7 +12,7 @@ import java.util.List;
 
 
 public class BasedController<E extends BasedEntity<I>, D extends BaseDto<I>, I extends Number, F extends AbstractTableFactory<E, D, I>>
-        implements ICrudController<E, D, I> {
+        implements ICrudController<D, I> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BasedController.class);
 
@@ -29,7 +29,7 @@ public class BasedController<E extends BasedEntity<I>, D extends BaseDto<I>, I e
     }
 
     @Override
-    public List<D> getAll()  {
+    public List<D> getAll() {
         LOGGER.info("In getAll " + dtoClassController.getName());
         return factory.createDtoList(service.getAll());
     }
@@ -44,7 +44,7 @@ public class BasedController<E extends BasedEntity<I>, D extends BaseDto<I>, I e
     }
 
     @Override
-    public void deleteById(I id) {
+    public void deletById(I id) {
         if (id == null) {
             LOGGER.warn("In deleteById [" + eClassController + "] - enter null");
         }
@@ -52,7 +52,7 @@ public class BasedController<E extends BasedEntity<I>, D extends BaseDto<I>, I e
     }
 
     @Override
-    public D saveOrUpdate(D dto) {
+    public D saverOrUpdate(D dto) {
         if (dto == null) {
             LOGGER.warn("In saveOrUpdate [" + eClassController + "] - enter null");
             return null;
