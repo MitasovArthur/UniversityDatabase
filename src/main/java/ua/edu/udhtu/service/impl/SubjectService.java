@@ -11,4 +11,14 @@ public class SubjectService extends BasedService<SubjectEntity, Long> {
     public SubjectService(SubjectRepository repository) {
         super(SubjectEntity.class, repository);
     }
+
+    @Override
+    protected void fillEntity(SubjectEntity loadFromDb, SubjectEntity fromClient) {
+        if (loadFromDb != null && fromClient != null) {
+            loadFromDb.setId(fromClient.getId());
+            loadFromDb.setNameSubject(fromClient.getNameSubject());
+            loadFromDb.setHourSubject(fromClient.getHourSubject());
+            loadFromDb.setActivity(fromClient.getActivity());
+        }
+    }
 }

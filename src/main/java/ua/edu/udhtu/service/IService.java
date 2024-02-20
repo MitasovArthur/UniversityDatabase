@@ -17,4 +17,5 @@ public interface IService<E extends BasedEntity<I>, I extends Number> {
 
     @PostMapping
     E saveOrUpdate(@RequestBody E entity);
+
 }

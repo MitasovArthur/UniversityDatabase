@@ -11,4 +11,14 @@ public class TeacherService extends BasedService<TeacherEntity, Long> {
     public TeacherService(TeacherRepository repository) {
         super(TeacherEntity.class, repository);
     }
+
+    @Override
+    protected void fillEntity(TeacherEntity loadFromDb, TeacherEntity fromClient) {
+        if (loadFromDb != null && fromClient != null) {
+            loadFromDb.setId(fromClient.getId());
+            loadFromDb.setPerson(fromClient.getPerson());
+            loadFromDb.setAcademicDegree(fromClient.getAcademicDegree());
+            loadFromDb.setSubjects(fromClient.getSubjects());
+        }
+    }
 }

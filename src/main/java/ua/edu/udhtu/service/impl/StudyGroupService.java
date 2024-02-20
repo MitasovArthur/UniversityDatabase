@@ -11,4 +11,14 @@ public class StudyGroupService extends BasedService<StudyGroupEntity, Long> {
     public StudyGroupService(StudyGroupRepository repository) {
         super(StudyGroupEntity.class, repository);
     }
+
+    @Override
+    protected void fillEntity(StudyGroupEntity loadFromDb, StudyGroupEntity fromClient) {
+        if (loadFromDb != null && fromClient != null) {
+            loadFromDb.setId(fromClient.getId());
+            loadFromDb.setCode(fromClient.getCode());
+            loadFromDb.setCurator(fromClient.getCurator());
+            loadFromDb.setStudents(fromClient.getStudents());
+        }
+    }
 }

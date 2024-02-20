@@ -57,10 +57,9 @@ public class BasedController<E extends BasedEntity<I>, D extends BaseDto<I>, I e
             LOGGER.warn("In saveOrUpdate [" + eClassController + "] - enter null");
             return null;
         }
-        E entity = service.saveOrUpdate(factory.createEntity(dto));
+                E entity = service.saveOrUpdate(factory.createEntity(dto));
         return factory.createDto(entity);
     }
-
     protected boolean isNullId(D dto) {
         return false;
     }

@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ua.edu.udhtu.model.entity.BasedEntity;
 import ua.edu.udhtu.service.IService;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
-public class BasedService<E extends BasedEntity<I>, I extends Number>
+public abstract class BasedService<E extends BasedEntity<I>, I extends Number>
         implements IService<E, I> {
 
     protected final static Logger LOGGER = LoggerFactory.getLogger(BasedService.class);
@@ -23,8 +24,8 @@ public class BasedService<E extends BasedEntity<I>, I extends Number>
     }
 
     @Override
-    public List<E> getAll( ) {
-    return repository.findAll();
+    public List<E> getAll() {
+        return repository.findAll();
     }
 
     @Override
@@ -54,11 +55,50 @@ public class BasedService<E extends BasedEntity<I>, I extends Number>
         }
     }
 
+    //    @Override
+//    public E saveOrUpdate(E entity) {
+//        LOGGER.info("In saveOrUpdate [" + eClassService + "] save a new entity");
+//        E savedEntity = repository.save(entity);
+//        LOGGER.info("In save [" + eClassService + "] save entity : {}", savedEntity);
+//        return savedEntity;
+//    }
+//    @Override
+//    public E saveOrUpdate(E entity) {
+//        LOGGER.info("In saveOrUpdate [" + eClassService + "] save or update entity");
+//        Optional<E> optionalEntity = repository.findById(entity.getId());
+//        if (optionalEntity.isPresent()) {
+//            E existingEntity = optionalEntity.get();
+//            fillEntity(existingEntity, entity);
+//            E updatedEntity = repository.save(existingEntity);
+//            LOGGER.info("In saveOrUpdate [" + eClassService + "] update entity: {}", updatedEntity);
+//            return updatedEntity;
+//        } else {
+//            E savedEntity = repository.save(entity);
+//            LOGGER.info("In saveOrUpdate [" + eClassService + "] save new entity: {}", savedEntity);
+//            return savedEntity;
+//        }
+//    }
     @Override
     public E saveOrUpdate(E entity) {
-        LOGGER.info("In saveOrUpdate [" + eClassService + "] save a new entity");
-        E savedEntity = repository.save(entity);
-        LOGGER.info("In save [" + eClassService + "] save entity : {}", savedEntity);
-        return savedEntity;
+        LOGGER.info("In saveOrUpdate [" + eClassService + "] save or update entity");
+
+        if (entity.getId() == null) {
+            E savedEntity = repository.save(entity);
+            LOGGER.info("In saveOrUpdate [" + eClassService + "] save new entity: {}", savedEntity);
+            return savedEntity;
+        } else {
+            Optional<E> optionalEntity = repository.findById(entity.getId());
+            if (optionalEntity.isPresent()) {
+                E existingEntity = optionalEntity.get();
+                fillEntity(existingEntity, entity);
+                E updatedEntity = repository.save(existingEntity);
+                LOGGER.info("In saveOrUpdate [" + eClassService + "] update entity: {}", updatedEntity);
+                return updatedEntity;
+            } else {
+                throw new EntityNotFoundException("Entity with id " + entity.getId() + " not found.");
+            }
+        }
     }
+
+    protected abstract void fillEntity(E loadFromDb, E fromClient);
 }
