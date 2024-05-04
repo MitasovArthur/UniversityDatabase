@@ -7,10 +7,11 @@ import ua.edu.udhtu.repository.ClassroomRepository;
 
 @Service
 public class ClassroomService extends BasedService<ClassroomEntity, Long> {
+        @Autowired
     public ClassroomService(ClassroomRepository repository) {
         super(ClassroomEntity.class, repository);
     }
-//    @Autowired
+
     @Override
     protected void fillEntity(ClassroomEntity loadFromDb, ClassroomEntity fromClient) {
         if (loadFromDb != null && fromClient != null) {

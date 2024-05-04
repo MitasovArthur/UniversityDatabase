@@ -19,17 +19,3 @@ public interface ICrudController<D extends BaseDto<I>, I> {
     @PostMapping()
     D saverOrUpdate(@RequestBody D dto);
 }
-//public interface ICrudController<E extends BasedEntity<I>, D extends BaseDto<I>, I extends Number> {
-//
-//    @GetMapping
-//    List<D> getAll();
-//
-//    @GetMapping("{id}")
-//    D getById(@PathVariable("{id}") I id);
-//
-//    @DeleteMapping("{id}")
-//    void deleteById(@PathVariable("{id}") I id);
-//
-//    @PostMapping
-//    D saveOrUpdate(@RequestBody D dto);
-//}

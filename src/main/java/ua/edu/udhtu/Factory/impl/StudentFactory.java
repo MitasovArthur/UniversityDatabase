@@ -38,7 +38,7 @@ public class StudentFactory extends AbstractTableFactory<StudentEntity, StudentD
     protected void fillEntity(StudentDto dto, StudentEntity entity) {
         fillEntityWithOnlyId(dto, entity);
         entity.setId(dto.getId());
-        entity.setPerson(personFactory.createEntityWithOnlyId(dto.getPerson()));
+        entity.setPerson(personFactory.createEntity(dto.getPerson())); //
         entity.setEducationType(dto.getEducationType());
         entity.setAddress(dto.getAddress());
         entity.setEmail(dto.getEmail());

@@ -14,7 +14,7 @@ public class PersonService extends BasedService<PersonEntity, Long> {
     }
 
     @Override
-    protected void fillEntity(PersonEntity loadFromDb, PersonEntity fromClient) {
+     protected void fillEntity(PersonEntity loadFromDb, PersonEntity fromClient) {
         if (loadFromDb != null && fromClient != null) {
             loadFromDb.setId(fromClient.getId());
             loadFromDb.setFirstName(fromClient.getFirstName());

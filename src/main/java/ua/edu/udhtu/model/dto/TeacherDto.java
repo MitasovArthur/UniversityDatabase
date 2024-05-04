@@ -8,6 +8,7 @@ public class TeacherDto extends BaseDto<Long> {
     private PersonDto person;
     private EAcademicDegree academicDegree;
     private List<SubjectDto> subjects;
+    private StudyGroupDto studyGroup;
 
     public PersonDto getPerson() {
         return person;
@@ -31,5 +32,13 @@ public class TeacherDto extends BaseDto<Long> {
 
     public void setSubjects(List<SubjectDto> subjects) {
         this.subjects = subjects;
+    }
+
+    public StudyGroupDto getStudyGroup() {
+        return studyGroup;
+    }
+
+    public void setStudyGroup(StudyGroupDto studyGroup) {
+        this.studyGroup = studyGroup;
     }
 }

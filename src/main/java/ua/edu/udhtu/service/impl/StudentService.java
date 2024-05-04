@@ -33,8 +33,8 @@ public class StudentService extends BasedService<StudentEntity, Long> {
                     newPerson.setMiddleName(fromClient.getPerson().getMiddleName());
                     newPerson.setBirthDay(fromClient.getPerson().getBirthDay());
                     newPerson.setNumberPhone(fromClient.getPerson().getNumberPhone());
-                    loadFromDb.setPerson(newPerson);
                     personRepository.save(newPerson);
+                    loadFromDb.setPerson(newPerson);
                 } else {
                     // Если у персоны есть ID, ищем ее в базе данных и обновляем значения
                     PersonEntity personFromClient = fromClient.getPerson();

@@ -55,29 +55,6 @@ public abstract class BasedService<E extends BasedEntity<I>, I extends Number>
         }
     }
 
-    //    @Override
-//    public E saveOrUpdate(E entity) {
-//        LOGGER.info("In saveOrUpdate [" + eClassService + "] save a new entity");
-//        E savedEntity = repository.save(entity);
-//        LOGGER.info("In save [" + eClassService + "] save entity : {}", savedEntity);
-//        return savedEntity;
-//    }
-//    @Override
-//    public E saveOrUpdate(E entity) {
-//        LOGGER.info("In saveOrUpdate [" + eClassService + "] save or update entity");
-//        Optional<E> optionalEntity = repository.findById(entity.getId());
-//        if (optionalEntity.isPresent()) {
-//            E existingEntity = optionalEntity.get();
-//            fillEntity(existingEntity, entity);
-//            E updatedEntity = repository.save(existingEntity);
-//            LOGGER.info("In saveOrUpdate [" + eClassService + "] update entity: {}", updatedEntity);
-//            return updatedEntity;
-//        } else {
-//            E savedEntity = repository.save(entity);
-//            LOGGER.info("In saveOrUpdate [" + eClassService + "] save new entity: {}", savedEntity);
-//            return savedEntity;
-//        }
-//    }
     @Override
     public E saveOrUpdate(E entity) {
         LOGGER.info("In saveOrUpdate [" + eClassService + "] save or update entity");
