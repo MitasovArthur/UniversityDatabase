@@ -9,6 +9,9 @@ public class TeacherDto extends BaseDto<Long> {
     private EAcademicDegree academicDegree;
     private List<SubjectDto> subjects;
     private StudyGroupDto studyGroup;
+    /**Nujno?*/
+    private TimetableOfClassesDto timetableOfClasses;
+    private GradeBookDto gradeBook;
 
     public PersonDto getPerson() {
         return person;
@@ -40,5 +43,21 @@ public class TeacherDto extends BaseDto<Long> {
 
     public void setStudyGroup(StudyGroupDto studyGroup) {
         this.studyGroup = studyGroup;
+    }
+
+    public TimetableOfClassesDto getTimetableOfClasses() {
+        return timetableOfClasses;
+    }
+
+    public void setTimetableOfClasses(TimetableOfClassesDto timetableOfClasses) {
+        this.timetableOfClasses = timetableOfClasses;
+    }
+
+    public GradeBookDto getGradeBook() {
+        return gradeBook;
+    }
+
+    public void setGradeBook(GradeBookDto gradeBook) {
+        this.gradeBook = gradeBook;
     }
 }

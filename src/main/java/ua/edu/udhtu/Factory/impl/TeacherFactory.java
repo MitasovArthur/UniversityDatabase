@@ -6,12 +6,20 @@ import ua.edu.udhtu.model.dto.SubjectDto;
 import ua.edu.udhtu.model.dto.TeacherDto;
 import ua.edu.udhtu.model.entity.PersonEntity;
 import ua.edu.udhtu.model.entity.StudyGroupEntity;
+import ua.edu.udhtu.model.entity.SubjectEntity;
 import ua.edu.udhtu.model.entity.TeacherEntity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.stream.Collectors;
 
 public class TeacherFactory extends AbstractTableFactory<TeacherEntity, TeacherDto, Long> {
     private AbstractTableFactory<PersonEntity, PersonDto, Long> personFactory;
+    private AbstractTableFactory<SubjectEntity, SubjectDto, Long> subjectFactory;
+    /**
+     * Это нужно
+     */
     private AbstractTableFactory<StudyGroupEntity, StudyGroupDto, Long> studyGroupFactory;
 
     public void setPersonFactory(AbstractTableFactory<PersonEntity, PersonDto, Long> personFactory) {
@@ -22,24 +30,18 @@ public class TeacherFactory extends AbstractTableFactory<TeacherEntity, TeacherD
         this.studyGroupFactory = studyGroupFactory;
     }
 
+    public void setSubjectFactory(AbstractTableFactory<SubjectEntity, SubjectDto, Long> subjectFactory) {
+        this.subjectFactory = subjectFactory;
+    }
+
+
     @Override
     protected TeacherDto buildDto(TeacherEntity entity, boolean all) {
         TeacherDto dto = new TeacherDto();
         dto.setId(entity.getId());
         dto.setPerson(personFactory.createDto(entity.getPerson()));
         dto.setAcademicDegree(entity.getAcademicDegree());
-        if (entity.getSubjects() != null) {
-            dto.setSubjects(new ArrayList<>(entity.getSubjects().size()));
-            entity.getSubjects().forEach(subjectEntity -> {
-                SubjectDto subjectDto = new SubjectDto();
-                {
-                    subjectDto.setId(subjectEntity.getId());
-                    subjectDto.setNameSubject(subjectEntity.getNameSubject());
-                    subjectDto.setHoursSubject(subjectEntity.getHourSubject());
-                }
-                dto.getSubjects().add(subjectDto);
-            });
-        }
+//        dto.setStudyGroup(studyGroupFactory.createDto(entity.getStudyGroup()));
         return dto;
     }
 
@@ -58,7 +60,7 @@ public class TeacherFactory extends AbstractTableFactory<TeacherEntity, TeacherD
         fillEntityWithOnlyId(dto, entity);
         entity.setPerson(personFactory.createEntity(dto.getPerson()));
         entity.setAcademicDegree(dto.getAcademicDegree());
-
+//        entity.setStudyGroup(studyGroupFactory.createEntity(dto.getStudyGroup()));
     }
 
     @Override

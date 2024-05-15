@@ -18,7 +18,7 @@ public class SubjectService extends BasedService<SubjectEntity, Long> {
             loadFromDb.setId(fromClient.getId());
             loadFromDb.setNameSubject(fromClient.getNameSubject());
             loadFromDb.setHourSubject(fromClient.getHourSubject());
-            loadFromDb.setActivity(fromClient.getActivity());
+//            loadFromDb.setActivity(fromClient.getActivity());
         }
     }
 }

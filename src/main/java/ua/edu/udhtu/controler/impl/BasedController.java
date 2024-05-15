@@ -60,15 +60,4 @@ public class BasedController<E extends BasedEntity<I>, D extends BaseDto<I>, I e
                 E entity = service.saveOrUpdate(factory.createEntity(dto));
         return factory.createDto(entity);
     }
-    protected boolean isNullId(D dto) {
-        return false;
-    }
-
-    protected I extractKey(D dto) {
-        return (I) dto.getId();
-    }
-
-    protected void vanishingId(D dto) {
-        dto.setId(null);
-    }
 }

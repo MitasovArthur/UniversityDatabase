@@ -2,10 +2,7 @@ package ua.edu.udhtu.Factory;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import ua.edu.udhtu.Factory.impl.ClassroomFactory;
-import ua.edu.udhtu.Factory.impl.PersonFactory;
-import ua.edu.udhtu.Factory.impl.StudentFactory;
-import ua.edu.udhtu.Factory.impl.TeacherFactory;
+import ua.edu.udhtu.Factory.impl.*;
 
 @Component
 public class FactoryConfig {
@@ -13,7 +10,10 @@ public class FactoryConfig {
     private final StudentFactory studentFactory = new StudentFactory();
     private final TeacherFactory teacherFactory = new TeacherFactory();
     private final ClassroomFactory classroomFactory = new ClassroomFactory();
-//    private final StudyGroupFactory studyGroupFactory = new StudyGroupFactory();
+    private final StudyGroupFactory studyGroupFactory = new StudyGroupFactory();
+    private final ActivityFactory activityFactory = new ActivityFactory();
+    private final SubjectFactory subjectFactory = new SubjectFactory();
+    private final GradeBookFactory gradeBookFactory = new GradeBookFactory();
 
     public FactoryConfig() {
         {//Student
@@ -21,7 +21,16 @@ public class FactoryConfig {
         }
         {//teacher
             teacherFactory.setPersonFactory(personFactory);
-//            teacherFactory.setStudyGroupFactory();
+            teacherFactory.setStudyGroupFactory(studyGroupFactory);
+        }
+        {//Activity
+            activityFactory.setSubjectFactory(subjectFactory);
+            activityFactory.setStudentFactory(studentFactory);
+//        activityFactory.setGradeBookFactory(gradeBookFactory);
+
+        }
+        {//StudyGroup
+        studyGroupFactory.setTeacherFactory(teacherFactory);
         }
 
     }
@@ -44,6 +53,25 @@ public class FactoryConfig {
     @Bean
     public ClassroomFactory getClassroomFactory() {
         return classroomFactory;
+    }
+
+    @Bean
+    public SubjectFactory getSubjectFactory() {
+        return subjectFactory;
+    }
+
+//    @Bean
+//    public GradeBookFactory getGradeBookFactory() {
+//        return gradeBookFactory;
+//    }
+
+    @Bean
+    public StudyGroupFactory getStudyGroupFactory() {
+        return studyGroupFactory;
+    }
+
+    public ActivityFactory getActivityFactory() {
+        return activityFactory;
     }
 }
 

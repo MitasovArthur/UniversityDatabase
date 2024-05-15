@@ -1,7 +1,9 @@
 package ua.edu.udhtu.Factory.impl;
 
 import ua.edu.udhtu.model.dto.ClassroomDto;
+import ua.edu.udhtu.model.dto.StudentDto;
 import ua.edu.udhtu.model.entity.ClassroomEntity;
+import ua.edu.udhtu.model.entity.StudentEntity;
 
 public class ClassroomFactory extends AbstractTableFactory<ClassroomEntity, ClassroomDto, Long> {
     @Override

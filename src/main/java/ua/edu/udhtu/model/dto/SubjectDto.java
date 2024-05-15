@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SubjectDto extends BaseDto<Long> {
     private String nameSubject;
-    private double hoursSubject;
+    private double hourSubject;
     private List<ActivityDto> activity;
 
     public String getNameSubject() {
@@ -15,12 +15,12 @@ public class SubjectDto extends BaseDto<Long> {
         this.nameSubject = nameSubject;
     }
 
-    public double getHoursSubject() {
-        return hoursSubject;
+    public double getHourSubject() {
+        return hourSubject;
     }
 
-    public void setHoursSubject(double hoursSubject) {
-        this.hoursSubject = hoursSubject;
+    public void setHourSubject(double hoursSubject) {
+        this.hourSubject = hoursSubject;
     }
 
     public List<ActivityDto> getActivity() {

@@ -7,6 +7,7 @@ public class StudentDto extends BaseDto<Long> {
     private EEducationType educationType;
     private String address;
     private String email;
+    private StudyGroupDto studyGroupDto;
 
     public PersonDto getPerson() {
         return person;
@@ -38,5 +39,13 @@ public class StudentDto extends BaseDto<Long> {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public StudyGroupDto getStudyGroupDto() {
+        return studyGroupDto;
+    }
+
+    public void setStudyGroupDto(StudyGroupDto studyGroupDto) {
+        this.studyGroupDto = studyGroupDto;
     }
 }

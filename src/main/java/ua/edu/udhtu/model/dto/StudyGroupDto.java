@@ -6,7 +6,7 @@ import java.util.List;
 
 public class StudyGroupDto extends BaseDto<Long> {
     private String code;
-    private TeacherEntity curator;
+    private TeacherDto curator;
     private List<StudentDto> students;
 
     public String getCode() {
@@ -17,11 +17,11 @@ public class StudyGroupDto extends BaseDto<Long> {
         this.code = code;
     }
 
-    public TeacherEntity getCurator() {
+    public TeacherDto getCurator() {
         return curator;
     }
 
-    public void setCurator(TeacherEntity curator) {
+    public void setCurator(TeacherDto curator) {
         this.curator = curator;
     }
 

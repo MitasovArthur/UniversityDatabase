@@ -40,10 +40,5 @@ public class PersonFactory extends AbstractTableFactory<PersonEntity, PersonDto,
     @Override
     protected void fillEntityWithOnlyId(PersonDto dto, PersonEntity entity) {
         entity.setId(dto.getId());
-//        entity.setFirstName(dto.getFirstName());
-//        entity.setLastName(dto.getLastName());
-//        entity.setMiddleName(dto.getMiddleName());
-//        entity.setBirthDay(dto.getBirthDay());
-//        entity.setNumberPhone(dto.getNumberPhone());
     }
 }

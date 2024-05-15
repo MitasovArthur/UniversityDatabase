@@ -26,7 +26,6 @@ public class StudentService extends BasedService<StudentEntity, Long> {
 
             if (fromClient.getPerson() != null) {
                 if (fromClient.getPerson().getId() == null) {
-                    // Если у персоны нет ID, создаем новую персону
                     PersonEntity newPerson = new PersonEntity();
                     newPerson.setFirstName(fromClient.getPerson().getFirstName());
                     newPerson.setLastName(fromClient.getPerson().getLastName());
@@ -36,7 +35,6 @@ public class StudentService extends BasedService<StudentEntity, Long> {
                     personRepository.save(newPerson);
                     loadFromDb.setPerson(newPerson);
                 } else {
-                    // Если у персоны есть ID, ищем ее в базе данных и обновляем значения
                     PersonEntity personFromClient = fromClient.getPerson();
                     Optional<PersonEntity> optionalPerson = personRepository.findById(personFromClient.getId());
                     if (optionalPerson.isPresent()) {

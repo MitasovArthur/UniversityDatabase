@@ -20,8 +20,8 @@ public class GradeBookFactory extends AbstractTableFactory<GradeBookEntity, Grad
     protected GradeBookDto buildDto(GradeBookEntity entity, boolean all) {
         GradeBookDto dto = new GradeBookDto();
         dto.setId(entity.getId());
-        dto.setSubject(subjectFactory.createDto(entity.getSubject()));
-        dto.setActivity(new ArrayList<>(entity.getActivity().size()));
+//        dto.setSubject(subjectFactory.createDto(entity.getSubject()));
+//        dto.setActivity(new ArrayList<>(entity.getActivity().size()));
         dto.setGrade(entity.getGrade());
         dto.setSemesterGrade(entity.getSemesterGrade());
         dto.setYearlyGrade(entity.getYearlyGrade());
@@ -42,8 +42,8 @@ public class GradeBookFactory extends AbstractTableFactory<GradeBookEntity, Grad
     protected void fillEntity(GradeBookDto dto, GradeBookEntity entity) {
         fillEntityWithOnlyId(dto, entity);
         entity.setId(dto.getId());
-        entity.setSubject(subjectFactory.createEntityWithOnlyId(dto.getSubject()));
-        entity.setActivity(new ArrayList<>(entity.getActivity().size()));
+//        entity.setSubject(subjectFactory.createEntityWithOnlyId(dto.getSubject()));
+//        entity.setActivity(new ArrayList<>(entity.getActivity().size()));
         entity.setGrade(dto.getGrade());
         entity.setSemesterGrade(dto.getSemesterGrade());
         entity.setYearlyGrade(dto.getYearlyGrade());
