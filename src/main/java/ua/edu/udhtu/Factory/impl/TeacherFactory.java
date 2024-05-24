@@ -1,26 +1,17 @@
 package ua.edu.udhtu.Factory.impl;
 
-import ua.edu.udhtu.model.dto.PersonDto;
-import ua.edu.udhtu.model.dto.StudyGroupDto;
-import ua.edu.udhtu.model.dto.SubjectDto;
-import ua.edu.udhtu.model.dto.TeacherDto;
-import ua.edu.udhtu.model.entity.PersonEntity;
-import ua.edu.udhtu.model.entity.StudyGroupEntity;
-import ua.edu.udhtu.model.entity.SubjectEntity;
-import ua.edu.udhtu.model.entity.TeacherEntity;
+import ua.edu.udhtu.model.dto.*;
+import ua.edu.udhtu.model.entity.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.stream.Collectors;
 
 public class TeacherFactory extends AbstractTableFactory<TeacherEntity, TeacherDto, Long> {
     private AbstractTableFactory<PersonEntity, PersonDto, Long> personFactory;
-    private AbstractTableFactory<SubjectEntity, SubjectDto, Long> subjectFactory;
-    /**
-     * Это нужно
-     */
     private AbstractTableFactory<StudyGroupEntity, StudyGroupDto, Long> studyGroupFactory;
+    private AbstractTableFactory<GradeBookEntity, GradeBookDto, Long> gradeBookFactory;
+    private AbstractTableFactory<SubjectEntity, SubjectDto, Long> subjectFactory;
+    private AbstractTableFactory<TimetableOfClassesEntity, TimetableOfClassesDto, Long> timeTableOfClassFactory;
 
     public void setPersonFactory(AbstractTableFactory<PersonEntity, PersonDto, Long> personFactory) {
         this.personFactory = personFactory;
@@ -30,10 +21,17 @@ public class TeacherFactory extends AbstractTableFactory<TeacherEntity, TeacherD
         this.studyGroupFactory = studyGroupFactory;
     }
 
+    public void setGradeBookFactory(AbstractTableFactory<GradeBookEntity, GradeBookDto, Long> gradeBookFactory) {
+        this.gradeBookFactory = gradeBookFactory;
+    }
+
     public void setSubjectFactory(AbstractTableFactory<SubjectEntity, SubjectDto, Long> subjectFactory) {
         this.subjectFactory = subjectFactory;
     }
 
+    public void setTimeTableOfClassFactory(AbstractTableFactory<TimetableOfClassesEntity, TimetableOfClassesDto, Long> timeTableOfClassFactory) {
+        this.timeTableOfClassFactory = timeTableOfClassFactory;
+    }
 
     @Override
     protected TeacherDto buildDto(TeacherEntity entity, boolean all) {
@@ -41,7 +39,28 @@ public class TeacherFactory extends AbstractTableFactory<TeacherEntity, TeacherD
         dto.setId(entity.getId());
         dto.setPerson(personFactory.createDto(entity.getPerson()));
         dto.setAcademicDegree(entity.getAcademicDegree());
-//        dto.setStudyGroup(studyGroupFactory.createDto(entity.getStudyGroup()));
+        if (entity.getStudyGroup() != null) {
+            dto.setStudyGroup(studyGroupFactory.createMinimalDto(entity.getStudyGroup()));
+        }
+
+        if (entity.getGradeBooks() != null && !entity.getGradeBooks().isEmpty()) {
+            dto.setGradeBook(new ArrayList<>());
+            for (GradeBookEntity gradeBook : entity.getGradeBooks()) {
+                dto.getGradeBook().add(gradeBookFactory.createMinimalDto(gradeBook));
+            }
+        }
+        if (entity.getSubjects() != null && !entity.getSubjects().isEmpty()) {
+            dto.setSubjects(new LinkedHashSet<>());
+            for (SubjectEntity subject : entity.getSubjects()) {
+                dto.getSubjects().add(subjectFactory.createMinimalDto(subject));
+            }
+        }
+        if (entity.getTimetableOfClasses() != null && !entity.getTimetableOfClasses().isEmpty()) {
+            dto.setTimetableOfClasses(new ArrayList<>());
+            for (TimetableOfClassesEntity timetableOfClasses : entity.getTimetableOfClasses()) {
+                dto.getTimetableOfClasses().add(timeTableOfClassFactory.createMinimalDto(timetableOfClasses));
+            }
+        }
         return dto;
     }
 
@@ -60,11 +79,34 @@ public class TeacherFactory extends AbstractTableFactory<TeacherEntity, TeacherD
         fillEntityWithOnlyId(dto, entity);
         entity.setPerson(personFactory.createEntity(dto.getPerson()));
         entity.setAcademicDegree(dto.getAcademicDegree());
-//        entity.setStudyGroup(studyGroupFactory.createEntity(dto.getStudyGroup()));
     }
 
     @Override
     protected void fillEntityWithOnlyId(TeacherDto dto, TeacherEntity entity) {
         entity.setId(dto.getId());
     }
+
+    @Override
+    protected TeacherDto createMinimalDto(TeacherEntity entity) {
+        if (entity == null) return null;
+        TeacherDto dto = new TeacherDto();
+        dto.setId(entity.getId());
+        dto.setPerson(personFactory.createDto(entity.getPerson()));
+        dto.setAcademicDegree(entity.getAcademicDegree());
+        return dto;
+    }
+
+    @Override
+    protected TeacherEntity createMinimalEntity(TeacherDto dto) {
+        if (dto == null) return null;
+        TeacherEntity entity = new TeacherEntity();
+        entity.setId(dto.getId());
+        entity.setPerson(personFactory.createEntity(dto.getPerson()));
+        entity.setAcademicDegree(dto.getAcademicDegree());
+        if (dto.getStudyGroup() != null) {
+            entity.setStudyGroup(studyGroupFactory.createEntityWithOnlyId(dto.getStudyGroup()));
+        }
+        return entity;
+    }
+
 }

@@ -2,18 +2,17 @@ package ua.edu.udhtu.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.security.auth.Subject;
 import java.util.Date;
 
 public class ActivityDto extends BaseDto<Long> {
-    private SubjectDto subjectDto;
+    private SubjectDto subject;
+    private StudentDto student;
     private String nameActivity;
     private String description;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private Date deadLine;
-    private StudentDto studentDto;
     private int grade;
-    private GradeBookDto gradeBookDto;
+    private GradeBookDto gradeBook;
 
     public String getNameActivity() {
         return nameActivity;
@@ -47,27 +46,27 @@ public class ActivityDto extends BaseDto<Long> {
         this.grade = grade;
     }
 
-    public SubjectDto getSubjectDto() {
-        return subjectDto;
+    public GradeBookDto getGradeBook() {
+        return gradeBook;
     }
 
-    public void setSubjectDto(SubjectDto subjectDto) {
-        this.subjectDto = subjectDto;
+    public void setGradeBook(GradeBookDto gradeBook) {
+        this.gradeBook = gradeBook;
     }
 
-    public StudentDto getStudentDto() {
-        return studentDto;
+    public SubjectDto getSubject() {
+        return subject;
     }
 
-    public void setStudentDto(StudentDto studentDto) {
-        this.studentDto = studentDto;
+    public void setSubject(SubjectDto subject) {
+        this.subject = subject;
     }
 
-    public GradeBookDto getGradeBookDto() {
-        return gradeBookDto;
+    public StudentDto getStudent() {
+        return student;
     }
 
-    public void setGradeBookDto(GradeBookDto gradeBookDto) {
-        this.gradeBookDto = gradeBookDto;
+    public void setStudent(StudentDto student) {
+        this.student = student;
     }
 }

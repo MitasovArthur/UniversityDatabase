@@ -3,6 +3,8 @@ package ua.edu.udhtu.model.entity;
 import ua.edu.udhtu.model.enumerated.EAcademicDegree;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,13 +20,13 @@ public class TeacherEntity extends BasedEntity<Long> {
     @ManyToMany(targetEntity = SubjectEntity.class)
     @JoinTable(name = "teaches_the_subject", joinColumns = @JoinColumn(name = "teacher_id"),
         inverseJoinColumns = @JoinColumn(name = "subject_id"))
-    private Set<SubjectEntity> subjects;
-    @OneToOne(targetEntity = StudyGroupEntity.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private Set<SubjectEntity> subjects = new LinkedHashSet<>();
+    @OneToOne(targetEntity = StudyGroupEntity.class, mappedBy = "curator")
     private StudyGroupEntity studyGroup;
     @OneToMany(targetEntity = TimetableOfClassesEntity.class, mappedBy = "studyGroup", fetch = FetchType.LAZY)
-    private List<TimetableOfClassesEntity> timetableOfClasses;
+    private List<TimetableOfClassesEntity> timetableOfClasses = new ArrayList<>();
     @OneToMany(targetEntity = GradeBookEntity.class, mappedBy = "teacher")
-    private List<GradeBookEntity> gradeBooks;
+    private List<GradeBookEntity> gradeBooks = new ArrayList<>();
 
     public PersonEntity getPerson() {
         return person;

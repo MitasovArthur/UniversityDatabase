@@ -1,6 +1,5 @@
 package ua.edu.udhtu.Factory.impl;
 
-import org.springframework.stereotype.Component;
 import ua.edu.udhtu.model.dto.ActivityDto;
 import ua.edu.udhtu.model.dto.GradeBookDto;
 import ua.edu.udhtu.model.dto.StudentDto;
@@ -10,7 +9,6 @@ import ua.edu.udhtu.model.entity.GradeBookEntity;
 import ua.edu.udhtu.model.entity.StudentEntity;
 import ua.edu.udhtu.model.entity.SubjectEntity;
 
-@Component
 public class ActivityFactory extends AbstractTableFactory<ActivityEntity, ActivityDto, Long> {
     private AbstractTableFactory<StudentEntity, StudentDto, Long> studentFactory;
     private AbstractTableFactory<SubjectEntity, SubjectDto, Long> subjectFactory;
@@ -32,13 +30,19 @@ public class ActivityFactory extends AbstractTableFactory<ActivityEntity, Activi
     protected ActivityDto buildDto(ActivityEntity entity, boolean all) {
         ActivityDto dto = new ActivityDto();
         dto.setId(entity.getId());
-//        dto.setSubjectDto(subjectFactory.createDto(entity.getSubject()));/***/
+        if (entity.getStudent() != null) {
+            dto.setSubject(subjectFactory.createMinimalDto(entity.getSubject()));
+        }
         dto.setNameActivity(entity.getNameActivity());
         dto.setDescription(entity.getDescription());
         dto.setDeadLine(entity.getDeadLine());
-//        dto.setStudentDto(studentFactory.createDto(entity.getStudent()));/***/
+        if (entity.getStudent() != null) {
+            dto.setStudent(studentFactory.createMinimalDto(entity.getStudent()));
+        }
         dto.setGrade(entity.getGrade());
-//        dto.setGradeBookDto(gradeBookFactory.createDto(entity.getGradeBook()));/***/
+        if (entity.getGradeBook() != null) {
+            dto.setGradeBook(gradeBookFactory.createMinimalDto(entity.getGradeBook()));
+        }
         return dto;
     }
 
@@ -56,17 +60,43 @@ public class ActivityFactory extends AbstractTableFactory<ActivityEntity, Activi
     protected void fillEntity(ActivityDto dto, ActivityEntity entity) {
         fillEntityWithOnlyId(dto, entity);
         entity.setId(dto.getId());
-//        entity.setSubject(subjectFactory.createEntity(dto.getSubjectDto()));/***/
+        if (dto.getSubject() != null) {
+            entity.setSubject(subjectFactory.createEntityWithOnlyId(dto.getSubject()));
+        }
         entity.setNameActivity(dto.getNameActivity());
         entity.setDescription(dto.getDescription());
         entity.setDeadLine(dto.getDeadLine());
-//        entity.setStudent(studentFactory.createEntity(dto.getStudentDto()));/***/
+        if (dto.getStudent() != null) {
+            entity.setStudent(studentFactory.createEntityWithOnlyId(dto.getStudent()));
+        }
         entity.setGrade(dto.getGrade());
-//        entity.setGradeBook(gradeBookFactory.createEntity(dto.getGradeBookDto()));/***/
+        if (dto.getGradeBook() != null) {
+            entity.setGradeBook(gradeBookFactory.createEntityWithOnlyId(dto.getGradeBook()));
+        }
     }
 
     @Override
     protected void fillEntityWithOnlyId(ActivityDto dto, ActivityEntity entity) {
         entity.setId(dto.getId());
+    }
+
+    @Override
+    protected ActivityDto createMinimalDto(ActivityEntity entity) {
+        if (entity == null) return null;
+        ActivityDto dto = new ActivityDto();
+        dto.setId(entity.getId());
+        dto.setNameActivity(entity.getNameActivity());
+        dto.setGrade(entity.getGrade());
+        return dto;
+    }
+
+    @Override
+    protected ActivityEntity createMinimalEntity(ActivityDto dto) {
+        if (dto == null) return null;
+        ActivityEntity entity = new ActivityEntity();
+        entity.setId(dto.getId());
+        entity.setNameActivity(dto.getNameActivity());
+        entity.setGrade(dto.getGrade());
+        return entity;
     }
 }

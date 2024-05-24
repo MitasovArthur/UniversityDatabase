@@ -15,4 +15,6 @@ public class StudyGroupController extends BasedController<StudyGroupEntity, Stud
     public StudyGroupController(StudyGroupService service, StudyGroupFactory factory) {
         super(StudyGroupEntity.class, StudyGroupDto.class, service, factory);
     }
+
+
 }

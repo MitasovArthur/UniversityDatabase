@@ -87,5 +87,7 @@ public abstract class AbstractTableFactory<E extends BasedEntity<I>, D extends B
 
     protected abstract void fillEntityWithOnlyId(D dto, E entity);
 
-    protected abstract D createMinimalDto(E studyGroup);
+    protected abstract D createMinimalDto(E entity);
+
+    protected abstract E createMinimalEntity(D dto);
 }

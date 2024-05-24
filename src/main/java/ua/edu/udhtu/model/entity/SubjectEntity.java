@@ -1,6 +1,8 @@
 package ua.edu.udhtu.model.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -11,17 +13,17 @@ public class SubjectEntity extends BasedEntity<Long> {
     private String nameSubject;
     @Column(name = "hour_subject")
     private double hourSubject;
-    @ManyToMany(targetEntity = TeacherEntity.class, mappedBy = "subjects", fetch = FetchType.LAZY)
-    private Set<TeacherEntity> teachers;
+    @ManyToMany(targetEntity = TeacherEntity.class, mappedBy = "subjects", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private Set<TeacherEntity> teachers = new LinkedHashSet<>();
     @OneToMany(targetEntity = TimetableOfClassesEntity.class, mappedBy = "subject", fetch = FetchType.LAZY)
-    private List<TimetableOfClassesEntity> timetableOfClasses;
+    private List<TimetableOfClassesEntity> timetableOfClasses = new ArrayList<>();
     @ManyToOne(targetEntity = StudyGroupEntity.class)
     @JoinColumn(name = "study_group_id")
     private StudyGroupEntity studyGroup;
     @OneToMany(targetEntity = ActivityEntity.class, mappedBy = "subject", cascade = CascadeType.REMOVE)
-    private List<ActivityEntity> activity;
+    private List<ActivityEntity> activity = new ArrayList<>();
     @OneToMany(targetEntity = GradeBookEntity.class, mappedBy = "subject")
-    private List<GradeBookEntity> gradeBooks;
+    private List<GradeBookEntity> gradeBooks = new ArrayList<>();
 
     public String getNameSubject() {
         return nameSubject;

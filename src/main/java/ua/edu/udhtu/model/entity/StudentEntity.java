@@ -3,6 +3,7 @@ package ua.edu.udhtu.model.entity;
 import ua.edu.udhtu.model.enumerated.EEducationType;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class StudentEntity extends BasedEntity<Long> {
     @JoinColumn(name = "study_group_id")
     private StudyGroupEntity studyGroup;
     @OneToMany(targetEntity = ActivityEntity.class, mappedBy = "student", cascade = CascadeType.REMOVE)
-    private List<ActivityEntity> activity;
+    private List<ActivityEntity> activity = new ArrayList<>();
 
     public PersonEntity getPerson() {
         return person;

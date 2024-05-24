@@ -20,4 +20,9 @@ public class ClassroomService extends BasedService<ClassroomEntity, Long> {
             loadFromDb.setType(fromClient.getType());
         }
     }
+
+    @Override
+    protected ClassroomEntity createEmptyEntity() {
+        return new ClassroomEntity();
+    }
 }

@@ -2,16 +2,17 @@ package ua.edu.udhtu.model.dto;
 
 import ua.edu.udhtu.model.enumerated.EAcademicDegree;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TeacherDto extends BaseDto<Long> {
     private PersonDto person;
     private EAcademicDegree academicDegree;
-    private List<SubjectDto> subjects;
+    private Set<SubjectDto> subjects = new HashSet<>();
     private StudyGroupDto studyGroup;
-    /**Nujno?*/
-    private TimetableOfClassesDto timetableOfClasses;
-    private GradeBookDto gradeBook;
+    private List<TimetableOfClassesDto> timetableOfClasses;
+    private List<GradeBookDto> gradeBook;
 
     public PersonDto getPerson() {
         return person;
@@ -29,11 +30,11 @@ public class TeacherDto extends BaseDto<Long> {
         this.academicDegree = academicDegree;
     }
 
-    public List<SubjectDto> getSubjects() {
+    public Set<SubjectDto> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(List<SubjectDto> subjects) {
+    public void setSubjects(Set<SubjectDto> subjects) {
         this.subjects = subjects;
     }
 
@@ -45,19 +46,19 @@ public class TeacherDto extends BaseDto<Long> {
         this.studyGroup = studyGroup;
     }
 
-    public TimetableOfClassesDto getTimetableOfClasses() {
+    public List<TimetableOfClassesDto> getTimetableOfClasses() {
         return timetableOfClasses;
     }
 
-    public void setTimetableOfClasses(TimetableOfClassesDto timetableOfClasses) {
+    public void setTimetableOfClasses(List<TimetableOfClassesDto> timetableOfClasses) {
         this.timetableOfClasses = timetableOfClasses;
     }
 
-    public GradeBookDto getGradeBook() {
+    public List<GradeBookDto> getGradeBook() {
         return gradeBook;
     }
 
-    public void setGradeBook(GradeBookDto gradeBook) {
+    public void setGradeBook(List<GradeBookDto> gradeBook) {
         this.gradeBook = gradeBook;
     }
 }

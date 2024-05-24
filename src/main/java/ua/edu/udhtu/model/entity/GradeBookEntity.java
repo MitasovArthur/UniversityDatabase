@@ -1,6 +1,7 @@
 package ua.edu.udhtu.model.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,9 +14,9 @@ public class GradeBookEntity extends BasedEntity<Long> {
     @JoinColumn(name = "teacher_id")
     private TeacherEntity teacher;
     @OneToOne(targetEntity = StudyGroupEntity.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private StudyGroupEntity group;
+    private StudyGroupEntity studyGroup;
     @OneToMany(targetEntity = ActivityEntity.class, mappedBy = "gradeBook", cascade = CascadeType.REMOVE)
-    private List<ActivityEntity> activity;
+    private List<ActivityEntity> activity = new ArrayList<>();
     @Column(name = "grade")
     private int grade;
     @Column(name = "semester_grade")
@@ -39,12 +40,12 @@ public class GradeBookEntity extends BasedEntity<Long> {
         this.teacher = teacher;
     }
 
-    public StudyGroupEntity getGroup() {
-        return group;
+    public StudyGroupEntity getStudyGroup() {
+        return studyGroup;
     }
 
-    public void setGroup(StudyGroupEntity group) {
-        this.group = group;
+    public void setStudyGroup(StudyGroupEntity group) {
+        this.studyGroup = group;
     }
 
     public List<ActivityEntity> getActivity() {

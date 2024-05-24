@@ -8,6 +8,7 @@ public class TimetableOfClassesDto extends BaseDto<Long> {
     private TeacherDto teacher;
     private StudyGroupDto studyGroup;
     private SubjectDto subject;
+    private ClassroomDto classroomDto;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private Date startLesson;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
@@ -52,5 +53,13 @@ public class TimetableOfClassesDto extends BaseDto<Long> {
 
     public void setEndLesson(Date endLesson) {
         this.endLesson = endLesson;
+    }
+
+    public ClassroomDto getClassroomDto() {
+        return classroomDto;
+    }
+
+    public void setClassroomDto(ClassroomDto classroomDto) {
+        this.classroomDto = classroomDto;
     }
 }

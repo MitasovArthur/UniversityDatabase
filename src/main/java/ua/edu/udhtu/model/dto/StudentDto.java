@@ -2,13 +2,16 @@ package ua.edu.udhtu.model.dto;
 
 import ua.edu.udhtu.model.enumerated.EEducationType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentDto extends BaseDto<Long> {
     private PersonDto person;
     private EEducationType educationType;
     private String address;
     private String email;
-    private StudyGroupDto studyGroupDto;
-
+    private StudyGroupDto studyGroup;
+    private List<ActivityDto> activity = new ArrayList<>();
     public PersonDto getPerson() {
         return person;
     }
@@ -41,11 +44,19 @@ public class StudentDto extends BaseDto<Long> {
         this.email = email;
     }
 
-    public StudyGroupDto getStudyGroupDto() {
-        return studyGroupDto;
+    public StudyGroupDto getStudyGroup() {
+        return studyGroup;
     }
 
-    public void setStudyGroupDto(StudyGroupDto studyGroupDto) {
-        this.studyGroupDto = studyGroupDto;
+    public void setStudyGroup(StudyGroupDto studyGroupDto) {
+        this.studyGroup = studyGroupDto;
+    }
+
+    public List<ActivityDto> getActivity() {
+        return activity;
+    }
+
+    public void setActivity(List<ActivityDto> activity) {
+        this.activity = activity;
     }
 }

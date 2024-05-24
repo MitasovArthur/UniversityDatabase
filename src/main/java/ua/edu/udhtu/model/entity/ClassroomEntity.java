@@ -3,6 +3,7 @@ package ua.edu.udhtu.model.entity;
 import ua.edu.udhtu.model.enumerated.EClassRoomType;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +15,7 @@ public class ClassroomEntity extends BasedEntity<Long> {
     @Column(name = "type", length = 20)
     private EClassRoomType type;
     @OneToMany(targetEntity = TimetableOfClassesEntity.class, mappedBy = "classRoom", fetch = FetchType.LAZY)
-    private List<TimetableOfClassesEntity> timetableOfClasses;
+    private List<TimetableOfClassesEntity> timetableOfClasses = new ArrayList<>();
 
     public String getCode() {
         return code;

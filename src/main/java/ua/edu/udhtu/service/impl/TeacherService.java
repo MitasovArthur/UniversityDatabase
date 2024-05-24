@@ -10,6 +10,7 @@ import ua.edu.udhtu.repository.StudyGroupRepository;
 import ua.edu.udhtu.repository.TeacherRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -49,36 +50,14 @@ public class TeacherService extends BasedService<TeacherEntity, Long> {
                     }
                 }
             }
-//            if (fromClient.getStudyGroup() != null) {
-//                if (fromClient.getStudyGroup().getId() == null) {
-//                    // Создаем новую учебную группу, если ID не задан
-//                    StudyGroupEntity newStudyGroup = new StudyGroupEntity();
-//                    newStudyGroup.setCode(fromClient.getStudyGroup().getCode());
-//                    // Здесь можно добавить логику для связи с другими сущностями, например, с преподавателем или расписанием
-//                    studyGroupRepository.save(newStudyGroup);
-//                    loadFromDb.setStudyGroup(newStudyGroup);
-//                } else {
-//                    // Обновляем существующую учебную группу, если ID задан
-//                    StudyGroupEntity studyGroupFromClient = fromClient.getStudyGroup();
-//                    Optional<StudyGroupEntity> optionalStudyGroup = studyGroupRepository
-//                            .findById(studyGroupFromClient.getId());
-//                    if (optionalStudyGroup.isPresent()) {
-////                        StudyGroupEntity existingStudyGroup = optionalStudyGroup.get();
-////                        existingStudyGroup.setCode(studyGroupFromClient.getCode());
-////                        // При необходимости добавьте обновление других полей и связей
-////                        studyGroupRepository.save(existingStudyGroup);
-//                        loadFromDb.setStudyGroup(optionalStudyGroup.get());
-//                    } else {
-//                        throw new EntityNotFoundException("StudyGroup with id " + studyGroupFromClient.getId() + " not found");
-//                    }
-//                }
-//            }
-
-            // Обновляем остальные поля учителя
             loadFromDb.setAcademicDegree(fromClient.getAcademicDegree());
-            loadFromDb.setSubjects(fromClient.getSubjects());  // Убедитесь, что subjects правильно обрабатывается и не вызовет NPE
-            loadFromDb.setStudyGroup(fromClient.getStudyGroup());
+            repository.save(loadFromDb);
         }
     }
 
+    @Override
+    protected TeacherEntity createEmptyEntity() {
+        return new TeacherEntity();
+    }
 }
+

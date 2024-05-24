@@ -60,7 +60,10 @@ public abstract class BasedService<E extends BasedEntity<I>, I extends Number>
         LOGGER.info("In saveOrUpdate [" + eClassService + "] save or update entity");
 
         if (entity.getId() == null) {
-            E savedEntity = repository.save(entity);
+            E newEntity = createEmptyEntity();
+            fillEntity(newEntity, entity);
+            E savedEntity = repository.save(newEntity);
+
             LOGGER.info("In saveOrUpdate [" + eClassService + "] save new entity: {}", savedEntity);
             return savedEntity;
         } else {
@@ -78,4 +81,6 @@ public abstract class BasedService<E extends BasedEntity<I>, I extends Number>
     }
 
     protected abstract void fillEntity(E loadFromDb, E fromClient);
+
+    protected abstract E createEmptyEntity();
 }

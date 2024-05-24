@@ -4,6 +4,8 @@ import java.util.List;
 
 public class GradeBookDto extends BaseDto<Long> {
     private SubjectDto subject;
+    private TeacherDto teacher;
+    private StudyGroupDto studyGroup;
     private List<ActivityDto> activity;
     private int grade;
     private double semesterGrade;
@@ -15,6 +17,22 @@ public class GradeBookDto extends BaseDto<Long> {
 
     public void setSubject(SubjectDto subject) {
         this.subject = subject;
+    }
+
+    public TeacherDto getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(TeacherDto teacher) {
+        this.teacher = teacher;
+    }
+
+    public StudyGroupDto getStudyGroup() {
+        return studyGroup;
+    }
+
+    public void setStudyGroup(StudyGroupDto studyGroup) {
+        this.studyGroup = studyGroup;
     }
 
     public List<ActivityDto> getActivity() {
