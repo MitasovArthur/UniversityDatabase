@@ -13,27 +13,10 @@ import ua.edu.udhtu.service.impl.StudentService;
 @RestController
 @RequestMapping("student")
 public class StudentController extends BasedController<StudentEntity, StudentDto, Long, StudentFactory> {
-
-    private final StudentRepository studentRepository;
-    private final ActivityRepository activityRepository;
-
     @Autowired
-    public StudentController(StudentService service, StudentFactory factory, StudentRepository studentRepository, ActivityRepository activityRepository) {
+    public StudentController(StudentService service, StudentFactory factory) {
         super(StudentEntity.class, StudentDto.class, service, factory);
-        this.studentRepository = studentRepository;
-        this.activityRepository = activityRepository;
+
     }
-//
-//    @PutMapping("/{idStudent}/activity/{idActivity}")
-//    public ResponseEntity<Void> addActivityToStudent(@PathVariable Long idStudent, @PathVariable Long idActivity) {
-//        StudentEntity studentEntity = studentRepository.findById(idStudent).orElse(null);
-//        ActivityEntity activityEntity = activityRepository.findById(idActivity).orElse(null);
-//        if (studentEntity == null || activityEntity == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        studentEntity.getActivity().add(activityEntity);
-//        studentRepository.save(studentEntity);
-//        return ResponseEntity.ok().build();
-//    }
 
 }

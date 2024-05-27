@@ -35,9 +35,9 @@ public class SubjectController extends BasedController<SubjectEntity, SubjectDto
             return ResponseEntity.notFound().build();
         }
         subjectEntity.getTeachers().add(teacher);
-        teacher.getSubjects().add(subjectEntity);  // Ensure both sides are synchronized
+        teacher.getSubjects().add(subjectEntity);
         subjectRepository.save(subjectEntity);
-        teacherRepository.save(teacher);  // Save teacher as well
+        teacherRepository.save(teacher);
         return ResponseEntity.ok().build();
     }
 }

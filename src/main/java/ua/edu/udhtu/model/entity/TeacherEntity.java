@@ -17,7 +17,7 @@ public class TeacherEntity extends BasedEntity<Long> {
     @Enumerated(EnumType.STRING)
     @Column(name = "academic_degree", length = 20)
     private EAcademicDegree academicDegree;
-    @ManyToMany(targetEntity = SubjectEntity.class)
+    @ManyToMany(targetEntity = SubjectEntity.class, cascade = {CascadeType.REMOVE})
     @JoinTable(name = "teaches_the_subject", joinColumns = @JoinColumn(name = "teacher_id"),
         inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private Set<SubjectEntity> subjects = new LinkedHashSet<>();

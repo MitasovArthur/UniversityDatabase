@@ -7,10 +7,10 @@ import java.util.Date;
 @Table(name = "timetable_of_classes")
 public class TimetableOfClassesEntity extends BasedEntity<Long> {
     @ManyToOne(targetEntity = TeacherEntity.class)
-    @JoinColumn(name = "study_group_id")
+    @JoinColumn(name = "teacher_id")
     private TeacherEntity teacher;
     @ManyToOne(targetEntity = StudyGroupEntity.class)
-    @JoinColumn(name = "Study_group")
+    @JoinColumn(name = "study_group")
     private StudyGroupEntity studyGroup;
     @ManyToOne(targetEntity = SubjectEntity.class)
     @JoinColumn(name = "subject_id")

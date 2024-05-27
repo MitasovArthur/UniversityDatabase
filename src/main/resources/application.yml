@@ -23,3 +23,5 @@ spring:
         dialect.storage_engine: innodb
       generate-ddl: true
       show-sql: false
+jwt:
+  secret: secret_password_for_digital_signature_of_the_token

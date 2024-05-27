@@ -16,13 +16,12 @@ import java.util.Optional;
 @Service
 public class TeacherService extends BasedService<TeacherEntity, Long> {
     private final PersonRepository personRepository;
-    private final StudyGroupRepository studyGroupRepository;
 
     @Autowired
-    public TeacherService(TeacherRepository repository, PersonRepository personRepository, StudyGroupRepository studyGroupRepository) {
+    public TeacherService(TeacherRepository repository, PersonRepository personRepository) {
         super(TeacherEntity.class, repository);
         this.personRepository = personRepository;
-        this.studyGroupRepository = studyGroupRepository;
+
     }
 
     @Override

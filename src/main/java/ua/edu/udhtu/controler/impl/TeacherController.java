@@ -49,5 +49,22 @@ public class TeacherController extends BasedController<TeacherEntity, TeacherDto
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+    @DeleteMapping("/{idTeacher}/subjects/{idSubject}")
+    public ResponseEntity<Void> removeSubjectToTeacher(@PathVariable Long idSubject, @PathVariable Long idTeacher) {
+        TeacherEntity teacher = teacherRepository.findById(idTeacher).orElse(null);
+        SubjectEntity subject = subjectRepository.findById(idSubject).orElse(null);
+
+        if (teacher == null || subject == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        boolean isAdded = teacher.getSubjects().remove(subject);
+        if (isAdded) {
+            teacherRepository.save(teacher);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
 }
 
